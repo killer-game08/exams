@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заявки — Учусь.РФ</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="../../index.html" class="logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+        </svg>
+        Учусь.РФ
+      </a>
+      <button class="mobile-btn" aria-label="Меню">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+        </svg>
+      </button>
+      <nav>
+        <ul class="nav">
+          <li><a href="../../index.html"><svg viewBox="0 0 24 24">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>Выход</a></li>
+          <li><a href="profile.html"><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+              </svg>Кабинет</a></li>
+          <li><a href="apply.html" class="active"><svg viewBox="0 0 24 24">
+                <path
+                  d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+              </svg>Заявка</a></li>
+          <li><a href="javascript:void(0)" onclick="logout()"><svg viewBox="0 0 24 24">
+                <path
+                  d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
+              </svg>Выйти</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main style="padding:20px 0">
+    <div class="container" style="max-width:520px">
+      <div class="card" style="margin-bottom:16px">
+        <div class="auth-top" style="margin-bottom:20px">
+          <svg viewBox="0 0 24 24" style="width:40px;height:40px;fill:var(--blue)">
+            <path
+              d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+          </svg>
+          <h1 style="font-size:22px;margin-top:8px">Новая заявка</h1>
+          <p style="color:var(--text-muted);margin:0">Выберите курс и условия</p>
+        </div>
+        <form id="appForm">
+          <div class="form-group">
+            <label class="form-label" for="course">Курс</label>
+            <select id="course" class="form-select" required>
+              <option value="">Выберите курс</option>
+            </select>
+            <span class="form-hint">Доступные программы обучения</span>
+          </div>
+          <div id="priceBox" class="price-block" style="display:none">
+            <span class="price-label">Стоимость:</span>
+            <span class="price-value" id="priceValue">—</span>
+          </div>
+          <div class="form-group" style="margin-top:18px">
+            <label class="form-label" for="date">Дата начала обучения</label>
+            <select id="date" class="form-select" required>
+              <option value="">Выберите дату</option>
+            </select>
+            <span class="form-hint">Ближайшие даты старта</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Способ оплаты</label>
+            <div class="pay-options">
+              <label class="pay-option selected">
+                <input type="radio" name="pay" value="Предоплата по QR-коду" checked hidden>
+                <div class="pay-icon"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM13 13h2v2h-2zM15 15h2v2h-2zM13 17h2v2h-2zM17 13h2v2h-2zM19 15h2v2h-2zM17 17h2v2h-2zM15 19h2v2h-2zM19 19h2v2h-2z" />
+                  </svg></div>
+                <span class="pay-text">Предоплата по QR-коду</span>
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="pay" value="Оплата картой МИР" hidden>
+                <div class="pay-icon"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.89 2 2 2h16c1.1 0 2-.89 2-2V6c0-1.1-.89-2-2-2zm0 14H4V8h16v10zm-2-8H6v2h12v-2z" />
+                  </svg></div>
+                <span class="pay-text">Оплата картой МИР</span>
+              </label>
+              <label class="pay-option">
+                <input type="radio" name="pay" value="Постоплата в офисе" hidden>
+                <div class="pay-icon"><svg viewBox="0 0 24 24">
+                    <path
+                      d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z" />
+                  </svg></div>
+                <span class="pay-text">Постоплата в офисе</span>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        </form>
+      </div>
+
+      <!-- Фото людей -->
+      <div class="card">
+        <h3 style="margin-bottom:12px">Наши студенты</h3>
+        <div class="people-grid" style="margin:0">
+          <div class="people-card"><img src="../icon/фото1.jpg" alt="">
+            <div class="overlay"><span>Выпускники</span></div>
+          </div>
+          <div class="people-card"><img src="../icon/фото2.jpg" alt="">
+            <div class="overlay"><span>2024</span></div>
+          </div>
+          <div class="people-card"><img src="../icon/фото3.jpg" alt="">
+            <div class="overlay"><span>Успех</span></div>
+          </div>
+          <div class="people-card"><img src="../icon/фото5.webp" alt="">
+            <div class="overlay"><span>Команда</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!Auth.check()) { location.href = '../../index.html'; return }
+
+      const courses = DB.get('courses') || [];
+      const sel = document.getElementById('course');
+      const priceBox = document.getElementById('priceBox');
+      const priceValue = document.getElementById('priceValue');
+
+      courses.forEach(c => {
+        const o = document.createElement('option');
+        o.value = c.id;
+        o.textContent = c.name;
+        o.dataset.price = c.price;
+        sel.appendChild(o);
+      });
+
+      // Показать цену при выборе курса
+      sel.addEventListener('change', function () {
+        const opt = this.options[this.selectedIndex];
+        if (opt.value) {
+          priceValue.textContent = opt.dataset.price || '—';
+          priceBox.style.display = 'flex';
+        } else {
+          priceBox.style.display = 'none';
+        }
+      });
+
+      // Генерируем даты — ближайшие понедельники
+      const dateSel = document.getElementById('date');
+      const today = new Date();
+      const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+      for (let i = 0; i < 8; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + (i * 7) + ((1 - today.getDay() + 7) % 7));
+        const dateStr = d.toISOString().split('T')[0];
+        const label = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        const o = document.createElement('option');
+        o.value = dateStr;
+        o.textContent = label;
+        dateSel.appendChild(o);
+      }
+
+      document.querySelectorAll('.pay-option').forEach(o => {
+        o.addEventListener('click', function () {
+          document.querySelectorAll('.pay-option').forEach(x => x.classList.remove('selected'));
+          this.classList.add('selected');
+          this.querySelector('input').checked = true;
+        });
+      });
+
+      document.getElementById('appForm').addEventListener('submit', function (e) {
+        e.preventDefault(); UI.clearForm(this);
+        const cid = document.getElementById('course').value;
+        const d = document.getElementById('date').value;
+        const p = document.querySelector('input[name="pay"]:checked').value;
+        if (!cid) { UI.err(document.getElementById('course'), 'Выберите курс'); return }
+        if (!d) { UI.err(document.getElementById('date'), 'Выберите дату'); return }
+        const c = courses.find(x => x.id == cid), u = Auth.get();
+        Apps.create({ userLogin: u.login, userName: u.fullName || u.login, courseId: cid, courseName: c.name, startDate: new Date(d).toLocaleDateString('ru-RU'), paymentMethod: p });
+        UI.toast('Заявка отправлена!', 'success');
+        this.reset();
+        priceBox.style.display = 'none';
+        document.querySelector('.pay-option').classList.add('selected');
+        setTimeout(() => location.href = 'profile.html', 1200);
+      });
+    });
+  </script>
+</body>
+
+</html>

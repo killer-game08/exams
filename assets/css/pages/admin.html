@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админ-панель — Учусь.РФ</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <a href="../../index.html" class="logo">
+      <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+      Учусь.РФ
+    </a>
+    <button class="mobile-btn" aria-label="Меню">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    </button>
+    <nav>
+      <ul class="nav">
+        <li><a href="../../index.html"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Выход</a></li>
+        <li><a href="admin.html" class="active"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.39-.3-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.49 0-.61.22l-1.92 3.32c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.39.3.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.58 1.62-.94l2.39.96c.22.08.49 0 .61-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>Админ</a></li>
+        <li><a href="javascript:void(0)" onclick="logout()"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>Выйти</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main style="padding:20px 0">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+      <h1 style="font-size:22px">Панель управления</h1>
+      <span class="helper" style="background:var(--blue-light);padding:6px 14px;border-radius:20px;color:var(--blue-dark);font-weight:600;font-size:13px">Admin26</span>
+    </div>
+
+    <div class="stats" style="margin-bottom:20px">
+      <div class="stat-card">
+        <div class="stat-icon blue"></div>
+        <div class="stat-info"><h3 id="stTotal">0</h3><p>Всего</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--blue-light)"></div>
+        <div class="stat-info"><h3 id="stNew">0</h3><p>Новые</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fff8e1"></div>
+        <div class="stat-info"><h3 id="stProg">0</h3><p>В процессе</p></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#e8f5e9"></div>
+        <div class="stat-info"><h3 id="stDone">0</h3><p>Завершено</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <h2 style="margin:0">Все заявки</h2>
+        <div class="filters" style="margin:0">
+          <div class="filter">
+            <label for="fStatus">Статус</label>
+            <select id="fStatus"><option value="">Все</option><option>Новая</option><option>Идет обучение</option><option>Обучение завершено</option></select>
+          </div>
+          <div class="filter">
+            <label for="fSearch">Поиск</label>
+            <input type="text" id="fSearch" placeholder="Логин или курс...">
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table" id="tbl">
+          <thead>
+            <tr>
+              <th onclick="sort('id')">№</th>
+              <th onclick="sort('userName')">Пользователь</th>
+              <th onclick="sort('courseName')">Курс</th>
+              <th onclick="sort('startDate')">Дата</th>
+              <th onclick="sort('paymentMethod')">Оплата</th>
+              <th onclick="sort('status')">Статус</th>
+              <th onclick="sort('created')">Создана</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </div>
+      <div class="pagination" id="pag"></div>
+    </div>
+  </div>
+</main>
+
+<div class="modal-overlay" id="stModal">
+  <div class="modal-box" style="max-width:380px">
+    <div class="modal-head">
+      <h3>Изменить статус</h3>
+      <button class="modal-close"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    </div>
+    <input type="hidden" id="stId">
+    <div class="form-group">
+      <label class="form-label">Новый статус</label>
+      <div class="pay-options" style="margin-top:10px">
+        <label class="pay-option st-opt" data-s="Новая">
+          <input type="radio" name="st" value="Новая" hidden><span class="badge badge-new">Новая</span>
+        </label>
+        <label class="pay-option st-opt" data-s="Идет обучение">
+          <input type="radio" name="st" value="Идет обучение" hidden><span class="badge badge-progress">Идет обучение</span>
+        </label>
+        <label class="pay-option st-opt" data-s="Обучение завершено">
+          <input type="radio" name="st" value="Обучение завершено" hidden><span class="badge badge-completed">Обучение завершено</span>
+        </label>
+      </div>
+    </div>
+    <button id="saveSt" class="btn btn-primary">Сохранить</button>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+let data=[],filt=[],page=1,per=10,sCol=null,sDir='asc';
+
+document.addEventListener('DOMContentLoaded',()=>{
+  if(!Auth.check()||!Auth.isAdmin()){location.href='../../index.html';return}
+  load();
+  document.getElementById('fStatus').addEventListener('change',filter);
+  document.getElementById('fSearch').addEventListener('input',deb(filter,300));
+
+  document.querySelectorAll('.st-opt').forEach(o=>{
+    o.addEventListener('click',function(){
+      document.querySelectorAll('.st-opt').forEach(x=>x.classList.remove('selected'));
+      this.classList.add('selected');this.querySelector('input').checked=true;
+    });
+  });
+
+  document.getElementById('saveSt').addEventListener('click',()=>{
+    const id=parseInt(document.getElementById('stId').value);
+    const st=document.querySelector('input[name="st"]:checked');
+    if(!st){UI.toast('Выберите статус','warning');return}
+    Apps.upd(id,st.value);new Modal('stModal').close();
+    UI.toast('Статус обновлён','success');load();
+  });
+});
+
+function load(){
+  data=Apps.all();filt=[...data];
+  document.getElementById('stTotal').textContent=data.length;
+  document.getElementById('stNew').textContent=data.filter(x=>x.status==='Новая').length;
+  document.getElementById('stProg').textContent=data.filter(x=>x.status==='Идет обучение').length;
+  document.getElementById('stDone').textContent=data.filter(x=>x.status==='Обучение завершено').length;
+  render();
+}
+
+function filter(){
+  const fs=document.getElementById('fStatus').value;
+  const fsh=document.getElementById('fSearch').value.toLowerCase();
+  filt=data.filter(a=>{
+    if(fs&&a.status!==fs)return false;
+    if(fsh){const s=(a.userName+' '+a.courseName+' '+a.userLogin).toLowerCase();if(!s.includes(fsh))return false}
+    return true;
+  });
+  page=1;render();
+}
+
+function sort(c){
+  if(sCol===c)sDir=sDir==='asc'?'desc':'asc';else{sCol=c;sDir='asc'}
+  filt.sort((a,b)=>{let av=a[c],bv=b[c];if(typeof av==='string')av=av.toLowerCase();if(typeof bv==='string')bv=bv.toLowerCase();if(av<bv)return sDir==='asc'?-1:1;if(av>bv)return sDir==='asc'?1:-1;return 0});
+  render();
+}
+
+function render(){
+  const tb=document.getElementById('tb'),start=(page-1)*per,end=start+per,slice=filt.slice(start,end);
+  if(!slice.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--text-muted)">Заявки не найдены</td></tr>';pag();return}
+  tb.innerHTML=slice.map(a=>{
+    let cls='badge-new';if(a.status==='Идет обучение')cls='badge-progress';if(a.status==='Обучение завершено')cls='badge-completed';
+    return `<tr><td>${a.id}</td><td><strong>${a.userName||a.userLogin}</strong></td><td>${a.courseName}</td><td>${a.startDate}</td><td>${a.paymentMethod}</td><td><span class="badge ${cls}">${a.status}</span></td><td>${a.created}</td><td><button class="btn btn-sm btn-primary" style="width:auto;display:inline-flex" onclick="openSt(${a.id},'${a.status}')">Изменить</button></td></tr>`;
+  }).join('');
+  pag();
+}
+
+function pag(){
+  const p=Math.ceil(filt.length/per),el=document.getElementById('pag');
+  if(p<=1){el.innerHTML='';return}
+  let h=`<button class="pag-btn" ${page===1?'disabled':''} onclick="go(${page-1})"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>`;
+  for(let i=1;i<=p;i++)h+=`<button class="pag-btn ${i===page?'active':''}" onclick="go(${i})">${i}</button>`;
+  h+=`<button class="pag-btn" ${page===p?'disabled':''} onclick="go(${page+1})"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>`;
+  el.innerHTML=h;
+}
+
+function go(p){const tp=Math.ceil(filt.length/per);if(p>=1&&p<=tp){page=p;render()}}
+
+function openSt(id,cur){
+  document.getElementById('stId').value=id;
+  document.querySelectorAll('.st-opt').forEach(o=>{
+    o.classList.remove('selected');const r=o.querySelector('input');r.checked=false;
+    if(o.dataset.s===cur){o.classList.add('selected');r.checked=true}
+  });
+  new Modal('stModal').open();
+}
+
+function deb(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
+</script>
+</body>
+</html>
